@@ -9,6 +9,9 @@ def defineBotCommands():
 
     @client.command()
     async def search(ctx, *args):
-        movieOptions = justWatchService.search(query=' '.join(args))
-        await ctx.message.delete()
-        await ctx.send("Escolha o filme:", view=getMovieSelectionView(movieOptions))
+        movieSearch = ' '.join(args)
+        
+        if movieSearch:
+            movieOptions = justWatchService.search(query=movieSearch)
+            await ctx.message.delete()
+            await ctx.send("Escolha o filme:", view=getMovieSelectionView(movieOptions))
