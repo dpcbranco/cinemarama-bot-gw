@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from config.discordClient import runClient
+from config.discordBot import runClient
 from controllers.botController import defineBotCommands
 
 if os.getenv("ENV") == "LOCAL":
