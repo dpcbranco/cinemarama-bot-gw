@@ -5,7 +5,7 @@ from views.movieSelectionView import getMovieSelectionView
 def defineBotCommands():
     @client.command()
     async def hello(ctx):
-        await ctx.send(f"Hello {ctx.author.nick}")
+        await ctx.send(f"Hello {ctx.author.nick if ctx.author.nick else ctx.author.name}")
 
     @client.command()
     async def search(ctx, *args):
