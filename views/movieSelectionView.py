@@ -2,7 +2,7 @@ import discord
 from discord.ui import Button, View
 
 async def button_callback(interaction):
-    await interaction.response.send_message("Filme adicionado a sua lista!")
+    await interaction.response.send_message("Filme adicionado a sua lista!", ephemeral=True)
 
 def getMovieSelectionView(movieOptions):
     view = View(timeout=60000)
