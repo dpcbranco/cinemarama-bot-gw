@@ -1,20 +1,18 @@
+import discord
 from config.discordBot import bot
 from services import justWatchService
 from views.movieSelectionView import getMovieSelectionView
 
 def defineBotCommands():
-    @bot.command()
-    async def hello(ctx):
-        await ctx.send(f"Hello {ctx.author.nick if ctx.author.nick else ctx.author.name}")
+    @bot.tree.command()
+    async def hello(interaction: discord.Interaction):
+        await interaction.response.send_message("Hello World")
 
-    @bot.command()
-    async def search(ctx, *args):
-        movieSearch = ' '.join(args)
-
-        if movieSearch:
-            movieOptions = justWatchService.search(query=movieSearch)
-            await ctx.message.delete()
+    @bot.tree.command()
+    async def search(interaction: discord.Interaction, movie_search: str):
+        if movie_search:
+            movieOptions = justWatchService.search(query=movie_search)
             if movieOptions:
-                await ctx.send("Escolha o filme:", view=getMovieSelectionView(movieOptions)) 
+                await interaction.response.send_message("Escolha o filme:", view=getMovieSelectionView(movieOptions), ephemeral=True) 
             else:
-                await ctx.send("Nenhum filme encontrado :(")
+                await interaction.response.send_message("Nenhum filme encontrado :(", ephemeral=True)
