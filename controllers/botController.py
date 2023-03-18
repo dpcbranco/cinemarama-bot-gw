@@ -6,7 +6,7 @@ from views.movieSelectionView import getMovieSelectionView
 def defineBotCommands():
     @bot.tree.command()
     async def hello(interaction: discord.Interaction):
-        await interaction.response.send_message("Hello World")
+        await interaction.response.send_message(f"Hello {interaction.user.nick if interaction.user.nick else interaction.user.name}")
 
     @bot.tree.command()
     async def search(interaction: discord.Interaction, movie_search: str):
